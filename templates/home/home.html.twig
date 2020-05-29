@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}{{ parent() }}{% endblock %}
+
+{% block signUp %}
+{% endblock signUp %}
+{% block signIn %}
+{% endblock signIn %}
+
+{% block signOut %}
+    {% block profile %}
+        <span class="alert alert-warning" role="alert" style="margin-right: 20px;padding-top: 5px;padding-bottom: 5px;">
+            {{ user.getFirstName() }}
+        </span>
+    {% endblock %}
+    <a style="color: white;margin-right: 20px;" href="{{ path('app_logout') }}">Sign out</a>
+{% endblock %}
+
+{% block startButton %}
+
+    <button id="start_button" type="button" class="btn btn-primary" style="float: right;" onclick="startTime('{{ user.id }}','{{ path('start_time', {'id': user.id}) }}');" disabled="true">
+        Start
+        <svg style="margin-bottom: 5px;" class="bi bi-stopwatch" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A6 6 0 108 3a6 6 0 000 12zm0 1A7 7 0 108 2a7 7 0 000 14z" clip-rule="evenodd"/>
+            <path fill-rule="evenodd" d="M8 4.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4.5a.5.5 0 010-1h3V5a.5.5 0 01.5-.5zM5.5.5A.5.5 0 016 0h4a.5.5 0 010 1H6a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+            <path d="M7 1h2v2H7V1z"/>
+        </svg>
+    </button>
+
+    <button id="time_button" type="button" class="btn btn-info animate__animated animate__fadeInLeft" style="display: none;float: right;margin-right: 5px;min-width: 150px;">
+        <span id="days">00</span> :
+        <span id="hours">00</span> :
+        <span id="minutes">00</span> :
+        <span id="seconds">00</span>
+    </button>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        getEnigmaStartTime({{ user.id }}, '{{ path('check_enigma_time', {'id': user.id}) }}');
+    </script>
+{% endblock %}

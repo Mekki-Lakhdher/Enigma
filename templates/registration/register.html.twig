@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}{{ parent() }}{% endblock %}
+
+{% block body %}
+
+    {{ parent() }}
+    {% block enigma %}{% endblock %}
+    <div class="jumbotron" style="margin: 5%;padding-left: 10%;padding-right: 10%;">
+
+        {{ form_start(form) }}
+
+        {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+        {{ form_row(form.first_name) }}
+        {{ form_row(form.last_name) }}
+        {{ form_row(form.birth_date) }}
+        <p>
+            Facebook link
+            <button type="button" class="btn btn-link" onclick="getFacebookProfile('user_facebook_link');" value>Click here to get your facebook profile link</button>
+            {{ form_widget(form.facebook_link) }}
+        </p>
+        {{ form_row(form.photo) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password.first) }}
+        {{ form_row(form.password.second) }}
+        {{ form_row(form.submit) }}
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
